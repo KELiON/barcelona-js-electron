@@ -314,7 +314,7 @@
 			<code>const fs = require('fs')</code>
 			<code>const installedApplications = fs.readdirSync('/Application')</code>
 			<code>const result = document.querySelector('#result1')</code>
-			<code>result.innerHTML = installedApplications</code>
+			<code>// `${installedApplications.length} installed applications`</code>
 		</pre>
 		<div class="result" id="result1"></div>
 		<script>
@@ -369,12 +369,13 @@
 	<section class="slide">
 		<h2>Advantages</h2>
 		<ul>
-			<li>Latest web technologies (~ -1 chrome version)</li>
+			<li>Latest web technologies</li>
 			<li class="next">No polyfills</li>
-			<li class="next">Only for one browser</li>
+			<li class="next">Only one browser</li>
 			<li class="next">Works for you – works for your user</li>
 			<li class="next">Usual environment (chrome, devtools)</li>
-
+			<li class="next">Use any js framework/library/transpiler/builder</li>
+			<li class="next">There is an npm package for everything</li>
 		</ul>
 	</section>
 
@@ -409,6 +410,8 @@
 			<li>clipboard</li>
 			<li>custom protocol</li>
 			<li><a href="" id="run-screens" class="dashed">screens</a></li>
+			<li>UI: frameless/transparent windows</li>
+			<li>UI: <a href="" class="dashed" id="run-vibrancy">vibrancy</a>, opacity</li>
 		</ul>
 
 			<div class="result" id="result-dialog"></div>
@@ -424,6 +427,17 @@
 				const { dialog } = require('electron').remote
 				const result = dialog.showSaveDialog({title: 'Save dialog example', defaultPath: 'default.html', buttonLabel: 'Save here'})
 				document.getElementById('result-dialog').innerHTML = `Will be saved to ${result}`
+			})
+
+			document.getElementById('run-vibrancy').addEventListener('click', (event) => {
+				event.preventDefault()
+				const { BrowserWindow } = require('electron').remote
+				new BrowserWindow({
+					width: 300,
+					height: 300,
+					vibrancy: 'dark',
+					fullscreenable: false
+				})
 			})
 
 			document.getElementById('run-screens').addEventListener('click', (event) => {
@@ -536,6 +550,247 @@
 			})
 		</script>
 	</section>
+
+	<section class="slide">
+		<h2>
+			<a href="https://github.com/TooTallNate/NodObjC" target="_blank">NodObjc</a>
+			<a href="" id="run-nodobjc" class="next dashed" />get icon of `~/Downloads`</a>
+		</h2>
+		<ul>
+			<li>NodeJS bindings to native MacOS APis</li>
+			<li>Examples: calendar, dictionary, contacts, native windows, system information</li>
+		</ul>
+		<pre class="nodobjc-code">
+			<code>const $ = require('nodobjc')</code>
+			<code>$.framework('Foundation')</code>
+			<code>$.framework('AppKit')</code>
+			<code>const pool = $.NSAutoreleasePool('alloc')('init')</code>
+			<code>const nativePath = $.NSString('stringWithUTF8String', path)</code>
+			<code>const icon = $.NSWorkspace('sharedWorkspace')('iconForFile', nativePath)</code>
+			<code>...</code>
+		</pre>
+		<div class="result" id="result-nodobjc"></div>
+		<style>
+			#result-nodobjc {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%)
+			}
+			.nodobjc-code {
+				font-size: .7em;
+			}
+		</style>
+		<script>
+			document.getElementById('run-nodobjc').addEventListener('click', (event) => {
+				event.preventDefault()
+
+				const $ = require('nodobjc')
+				$.framework('Foundation')
+				$.framework('AppKit')
+
+				const getFileIcon = (path) => {
+				  return new Promise(resolve => {
+				    const pool = $.NSAutoreleasePool('alloc')('init')
+						const nativePath = $.NSString('stringWithUTF8String', path)
+				    const icon = $.NSWorkspace('sharedWorkspace')('iconForFile', nativePath)
+				    const dict = $.NSDictionary(
+				      'dictionaryWithObject',
+				      $(1),
+				      'forKey',
+				      $.NSString('stringWithUTF8String', '')
+				    )
+				    const rect = $.NSMakeRect(0, 0, 256, 256)
+				    const bestIcon = icon('bestRepresentationForRect', rect, 'context', null, 'hints', null)
+				    const bestImage = $.NSImage('alloc')('init')
+				    bestImage('addRepresentation', bestIcon)
+				    const bitmap = $.NSBitmapImageRep(
+				      'imageRepsWithData',
+				      bestImage('TIFFRepresentation')
+				    )('objectAtIndex', 0)
+				    const png = bitmap('representationUsingType', $.NSPNGFileType, 'properties', dict)
+				    const base64 = png('base64Encoding')
+				    resolve(`data:image/png;base64,${base64.toString()}`)
+				    pool('drain')
+				  })
+				}
+
+				const homepath = require('os').homedir()
+				getFileIcon(`${homepath}/Downloads`).then(base64 => {
+					document.getElementById('result-nodobjc').innerHTML = `<img src="${base64}" />`
+				})
+			})
+		</script>
+	</section>
+
+	<section class="slide">
+		<h2>
+			<a href="https://github.com/NodeRT/NodeRT" target="_blank">NodeRT</a>
+		</h2>
+		<ul>
+			<li>NodeJS wrappers for UWP*/WinRT APIs</li>
+			<li>Examples: system, geolocation, wallpapers, start screen, faceanalysis, wallet, directx</li>
+			<li><a href="https://www.npmjs.com/~nodert-win10" target="_blank">List</a> of packages</li>
+		</ul>
+		<p class="note">* UWP – Universal Windows Platform</p>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>
+			<a href="https://github.com/octalmage/robotjs" target="_blank">RobotJS</a>
+			<a href="" id="run-robotjs" class="next dashed">move my cursor</a>
+		</h2>
+		<ul>
+			<li>Control the mouse</li>
+			<li>Emulate the keyboard </li>
+			<li>Read pixel color from the screen</li>
+		</ul>
+		<script>
+			document.getElementById('run-robotjs').addEventListener('click', (event) => {
+				event.preventDefault()
+				// Move the mouse across the screen as a sine wave.
+				var robot = require("robotjs");
+
+				// Speed up the mouse.
+				robot.setMouseDelay(2);
+
+				var twoPI = Math.PI * 2.0;
+				var screenSize = robot.getScreenSize();
+				var height = (screenSize.height / 2) - 10;
+				var width = screenSize.width;
+
+				for (var x = 0; x < width; x++)
+				{
+				    y = height * Math.sin((twoPI * x) / width) + height;
+				    robot.moveMouse(x, y);
+				}
+			})
+		</script>
+	</section>
+
+	<section class="slide problems">
+		<h2>Problems</h2>
+		<img class="cover" src="./pictures/houston.jpeg" />
+		<p class="note photo-note">Photo by Vlad Busuioc / Unsplash</p>
+		<style>
+			.problems .cover {
+				max-height: 100%;
+				max-width: none;
+			}
+			.problems h2 {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				color: #fff;
+				text-shadow: 1px 1px 1px #000;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Size</h2>
+		<img src="./pictures/sizes.png" width="100%" />
+		<ol>
+			<li class="next">Each build includes node and chromium</li>
+			<li class="next">Min. size of .app ~100mb</li>
+		</ol>
+	</section>
+
+	<section class="slide">
+		<h2>Memory</h2>
+		<img src="./pictures/memory1.png" class="memory-screenshot" />
+		<img src="./pictures/memory2.png" class="memory-screenshot next" />
+		<img src="./pictures/memory3.png" class="memory-screenshot next" />
+		<div class="next memory-now">
+			We are using <a href="" class="" id="run-memory">now</a> <span id="memory-result"></span>
+		</div>
+		<script>
+			document.getElementById('run-memory').addEventListener('click', (event) => {
+				event.preventDefault()
+				require('child_process').exec(`top -l 1|grep "Electron"|awk '{print $9}'`, (err, output) => {
+					const usage = output.split("\n").reduce((acc, mem) => {
+						if (!mem) return acc;
+						mem = mem.replace('+', '')
+						mem = mem.endsWith('K') ? parseInt(mem, 10) / 1024 : parseInt(mem, 10)
+						return acc + mem
+					}, 0)
+					document.getElementById('memory-result').innerHTML = `${usage.toFixed(2)}MB`
+				})
+			})
+		</script>
+		<style>
+			.memory-now {
+				position: absolute;
+				bottom: 50px;
+			}
+			.memory-screenshot {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				box-shadow: 0 0 10px 1px #777;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Should I use?</h2>
+		<ul class="col col1">
+			<li class="list-title">No</li>
+			<li class="next">Offline (Service workers)</li>
+			<li class="next">Notifications </a></li>
+			<li class="next">Background tasks (Web workers)</li>
+			<li class="next">Desktop wrapper for web</li>
+		</ul>
+		<ul class="col">
+			<li class="list-title">Yes</li>
+			<li class="next">Native APIs</li>
+			<li class="next">Browser UI is not enough</li>
+		</ul>
+
+		<style>
+			.col {
+				white-space: nowrap;
+				display: inline-block;
+				vertical-align: top;
+			}
+			.col1 {
+				margin-right: 10%;
+			}
+			.list-title {
+				list-style: none;
+				padding-left: 40px;
+				font-weight: bold;
+			}
+			.list-title::before {
+				visibility: hidden;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Links</h2>
+		<ul>
+			<li><a href="https://github.com/sindresorhus/awesome-electron">awesome-electron</a></li>
+			<li><a href="https://electron.atom.io/apps/">electron.atom.io/apps</a></li>
+			<li><a href="https://twitter.com/asubbotin">@asubbotin</a></li>
+			<li><a href="https://cerebroapp.com">cerebroapp.com</a></li>
+			<p class="presentation-link">Presentation: <a href="https://github.com/KELiON/barcelona-js-electron">github.com/KELiON/barcelona-js-electron</a></p>
+		</ul>
+		<style>
+			.presentation-link {
+				margin-top: 50px;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2 class="shout">Questions?</h2>
+	</section>
+
+
 	<div class="progress"></div>
 	<script src="shower/shower.min.js"></script>
 </body>
