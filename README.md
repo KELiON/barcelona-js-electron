@@ -7,5 +7,6 @@ To run this presentation in electron clone this repo and run:
 
 ```
 yarn
+yarn rebuild
 yarn start
 ```
