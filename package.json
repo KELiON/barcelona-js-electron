@@ -1,0 +1,16 @@
+{
+  "name": "barcelona-js-electron-wrapper",
+  "version": "1.0.0",
+  "description": "Presentation about electron inside electron",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "Alexandr Subbotin <kelionweb@gmail.com> (http://asubbotin.ru)",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.6.1",
+    "robotjs": "^0.4.5"
+  }
+}

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Electron.js: should I use it?</title>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen-16x10.css">
+</head>
+<body class="shower list">
+	<header class="caption">
+		<h1>Electron.js: should I use it?</h1>
+		<p>Alexandr Subbotin.</p>
+	</header>
+	<section class="slide" id="cover">
+		<img src="pictures/electron-logo.png" alt="Electron.js">
+		<h2>Electron.js: should I use it?</h2>
+		<p>By <a href="https://twitter.com/asubbotin">Alexandr Subbotin</a></p>
+		<style>
+			#cover {
+				background-color: #A7EDF9;
+			}
+			#cover h2 {
+				margin:30px 0 0;
+				color: #49848E;
+				text-align:center;
+				font-size:70px;
+				}
+			#cover p {
+				margin:10px 0 0;
+				text-align:center;
+				color: #49848E;
+				font-style:italic;
+				font-size:20px;
+			}
+			#cover p a {
+				color: #49848E;
+			}
+			.slide a.dashed {
+				background: none;
+				text-decoration: none;
+				border-bottom: 1px dashed;
+			}
+			h2 a {
+				font-size: .75em;
+			}
+			.photo-note {
+				position: absolute;
+		    bottom: 0;
+		    right: 100px;
+				font-size: .5em;
+			}
+
+			.result {
+				font-size: .8em;
+				margin-top: 20px;
+			}
+		</style>
+	</section>
+	<section class="slide what">
+		<h2>What is electron.js?</h2>
+		<img class="cover" src="./pictures/what.jpeg" />
+		<p class="note photo-note">Photo by Emily Morter / Unsplash</p>
+		<style>
+			.what h2 {
+				position: absolute;
+				left: 110px;
+    		top: 10px;
+				color: #fff;
+				font-size: 3em;
+				text-shadow: 1px 1px 1px #000;
+			}
+		</style>
+	</section>
+	<section class="slide">
+		<h2>What is Electron.js?</h2>
+		<div class="columns">
+			<div class="column">
+				<img src="pictures/html.png" alt="Html" class="what-icon">
+				<img src="pictures/css.png" alt="Css" class="what-icon">
+				<img src="pictures/js.png" alt="Js" class="what-icon">
+			</div>
+			<div class="column arrow-column next">
+				→
+			</div>
+			<div class="column next">
+				<img src="pictures/mac.png" alt="Mac OS" class="what-icon">
+				<img src="pictures/windows.png" alt="Windows" class="what-icon">
+				<img src="pictures/linux.png" alt="Linux" class="what-icon">
+			</div>
+		</div>
+		<style>
+			.columns {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: nowrap;
+				padding: 0 150px;
+			}
+			.column {
+				display: flex;
+				flex-direction: column;
+			}
+			.arrow-column {
+				justify-content: center;
+				padding: 0 30px;
+				text-align: center;
+				flex-grow: 2;
+				font-size: 3em;
+			}
+			.what-icon {
+				height: 128px;
+				padding: 10px;
+			}
+		</style>
+	</section>
+	<section class="slide">
+		<img src="pictures/atom.png" class="app-icon app-icon1" />
+		<p class="note next atom-note">* Formerly "Atom core"</p>
+		<div class="next">
+			<img src="pictures/slack.png" class="app-icon app-icon2" />
+			<img src="pictures/n1.png" class="app-icon app-icon3" />
+			<img src="pictures/brave.png" class="app-icon app-icon4" />
+			<img src="pictures/hyper.png" class="app-icon  app-icon5" />
+			<img src="pictures/cerebro.png" class="app-icon app-icon6" />
+			<img src="pictures/vscode.png" class="app-icon app-icon7" />
+			<img src="pictures/webtorrent.png" class="app-icon app-icon8" />
+		</div>
+		<style>
+			.atom-note {
+				position: absolute;
+				bottom: 30px;
+			}
+			.app-icon {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+			}
+			.app-icon1 {
+				transform: translate(-50%, -50%)
+			}
+			.app-icon2 {
+				transform: translate(-100%, -200%)
+			}
+			.app-icon3 {
+				transform: translate(-50%, 100%)
+			}
+			.app-icon4 {
+				transform: translate(-200%, -100%)
+			}
+			.app-icon5 {
+				transform: translate(100%, -100%)
+			}
+			.app-icon6 {
+				transform: translate(-200%, 50%)
+			}
+			.app-icon7 {
+				transform: translate(100%, 50%)
+			}
+			.app-icon8 {
+				transform: translate(0%, -200%)
+			}
+
+		</style>
+	</section>
+	<section class="slide">
+		<a href="http://electron.atom.io/apps" target="_blank">
+			<img src="pictures/and-more.png" class="cover" />
+		</a>
+	</section>
+
+	<section class="slide chromium-plus-node">
+		<img src="./pictures/chromium.png" class="chromium"/>
+		<span class="math-sign next">+</span>
+		<span class="nodejs next">
+			<img src="./pictures/node.svg" />
+		</span>
+		<span class="math-sign next">=</span>
+		<img src="./pictures/electron.png" class="electron-icon next"  />
+		<style>
+			.chromium-plus-node {
+				padding-top: 200px;
+				text-align: center;
+			}
+			.chromium {
+				height: 128px;
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.math-sign {
+				display: inline-block;
+				vertical-align: middle;
+				font-size: 3em;
+				padding: 0 10px;
+			}
+			.nodejs {
+				display: inline-block;
+				background: #333333;
+				border-radius: 10px;
+				padding: 20px;
+				vertical-align: middle;
+			}
+			.nodejs img{
+				height: 128px;
+			}
+			.electron-icon {
+				height: 128px;
+				display: inline-block;
+				vertical-align: middle;
+			}
+		</style>
+	</section>
+
+	<section class="slide processes">
+		<div class="main-process">
+			<span class="nodejs small">
+				<img src="./pictures/node.svg" />
+			</span>
+			Main process
+		</div>
+
+		<img src="./pictures/arrows.svg" class="process-arrows next" />
+
+		<div class="renderer-process-wrapper next">
+			<div class="renderer-process">
+				<img src="./pictures/chromium.png" class="chromium"/>
+				Renderer Process
+			</div>
+			<div class="renderer-process">
+				<img src="./pictures/chromium.png" class="chromium"/>
+				Renderer Process
+			</div>
+		</div>
+
+		<style>
+			.nodejs.small {
+				padding: 5px;
+				border-radius: 5px;
+				margin-right: 10px;
+				height: 48px;
+			}
+			.nodejs.small img {
+				height: 100%;
+			}
+			.renderer-process-wrapper {
+				position: absolute;
+				white-space: pre-wrap;
+				top: 50%;
+				left: 340px;
+				transform: translate(0, -50%);
+			}
+			.renderer-process {
+				border: 1px solid #999;
+				border-radius: 5px;
+				padding: 15px 30px;
+				display: inline-block;
+				white-space: normal;
+				margin-bottom: 60px;
+			}
+			.renderer-process:last-child {
+				margin-bottom: 0;
+			}
+			.renderer-process img {
+				height: 48px;
+				margin-right: 10px;
+			}
+			.main-process {
+				border: 1px solid #999;
+				border-radius: 5px;
+				padding: 15px 30px;
+				display: inline-block;
+				position: absolute;
+				top: 50%;
+				left: 40px;
+				transform: translate(0, -50%);
+			}
+			.process-arrows {
+				position: absolute;
+		    top: 50%;
+		    transform: translate(0, -50%);
+		    left: 330px;
+			}
+		</style>
+	</section>
+
+	<section class="slide processes">
+		<div class="main-process">
+			<span class="nodejs small">
+				<img src="./pictures/node.svg" />
+			</span>
+			Main process
+		</div>
+
+		<img src="./pictures/arrows.svg" class="process-arrows" />
+
+		<div class="renderer-process-wrapper">
+			<div class="renderer-process">
+				<img src="./pictures/chromium.png" class="chromium"/>
+				Main UI window
+			</div>
+			<div class="renderer-process">
+				<img src="./pictures/chromium.png" class="chromium"/>
+				Tasks processing
+			</div>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h2>
+				Chromium + Node.js
+				<a href="" id="run1" class="next dashed" />run</a>
+		</h2>
+		<div id="#result1"></div>
+		<pre>
+			<code>const fs = require('fs')</code>
+			<code>const installedApplications = fs.readdirSync('/Application')</code>
+			<code>const result = document.querySelector('#result1')</code>
+			<code>result.innerHTML = installedApplications</code>
+		</pre>
+		<div class="result" id="result1"></div>
+		<script>
+			document.getElementById('run1').addEventListener('click', (event) => {
+				event.preventDefault()
+				const result = document.getElementById('result1')
+				try {
+					const fs = require('fs')
+					const installedApplications = fs.readdirSync('/Applications')
+					result.innerHTML = `You have ${installedApplications.length} installed applications`
+				} catch (err) {
+					result.innerHTML = `Open this presentation electron for better experience `
+				}
+			})
+		</script>
+	</section>
+
+	<section class="slide">
+		<h2>
+				Modern technologies
+				<a href="" id="run2" class="next dashed" />run</a>
+		</h2>
+		<div id="#result2"></div>
+		<pre>
+			<code>const url = 'http://freegeoip.net/json/'</code>
+			<code>const response = await fetch(url)</code>
+			<code>const json = await response.json()</code>
+			<code>// Now json contains latitude and longitude</code>
+		</pre>
+		<div class="result" id="result2"></div>
+		<img class="next electron-versions" src="pictures/electron-versions.png" />
+		<style>
+			.electron-versions {
+				margin-top: 25px;
+				max-width: 100%;
+			}
+		</style>
+		<script>
+			document.getElementById('run2').addEventListener('click', async (event) => {
+				event.preventDefault()
+				const url = 'http://freegeoip.net/json/'
+				const response = await fetch(url)
+				const json = await response.json()
+				document.getElementById('result2').innerHTML = `
+					Latitude: ${json.latitude}
+					Longitude: ${json.longitude}
+				`
+			})
+		</script>
+	</section>
+
+	<section class="slide">
+		<h2>Advantages</h2>
+		<ul>
+			<li>Latest web technologies (~ -1 chrome version)</li>
+			<li class="next">No polyfills</li>
+			<li class="next">Only for one browser</li>
+			<li class="next">Works for you – works for your user</li>
+			<li class="next">Usual environment (chrome, devtools)</li>
+
+		</ul>
+	</section>
+
+	<section class="slide tools">
+		<h2>Tools</h2>
+		<img class="cover" src="./pictures/tools.jpeg" />
+		<p class="note photo-note">Photo by Felix Russell-Saw / Unsplash</p>
+		<style>
+			.tools h2 {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				color: #fff;
+				text-shadow: 1px 1px 1px #000;
+			}
+		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Electron API</h2>
+		<ul class="double electron-list">
+			<li>global shortcuts</li>
+			<li>tray</li>
+			<li>system menu</li>
+			<li>audio/video/screen capturing</li>
+			<li>open/<a href="" id="open-dialog" class="dashed">save</a> dialogs</li>
+			<li>webcam</li>
+			<li>microphone</li>
+			<li>geolocation</li>
+			<li>dock</li>
+			<li>clipboard</li>
+			<li>custom protocol</li>
+			<li><a href="" id="run-screens" class="dashed">screens</a></li>
+		</ul>
+
+			<div class="result" id="result-dialog"></div>
+			<div class="result" id="result-screens"></div>
+		<style>
+			.electron-list {
+				line-height: 125%;
+			}
+		</style>
+		<script>
+			document.getElementById('open-dialog').addEventListener('click', (event) => {
+				event.preventDefault()
+				const { dialog } = require('electron').remote
+				const result = dialog.showSaveDialog({title: 'Save dialog example', defaultPath: 'default.html', buttonLabel: 'Save here'})
+				document.getElementById('result-dialog').innerHTML = `Will be saved to ${result}`
+			})
+
+			document.getElementById('run-screens').addEventListener('click', (event) => {
+				event.preventDefault()
+				const { screen } = require('electron').remote
+				let result = 'Connected screens:<ul>'
+				screen.getAllDisplays().forEach(({ bounds }) => {
+					result += `<li>Resolution: ${bounds.width}x${bounds.height}, position: x: ${bounds.x} y: ${bounds.y}</li>`
+				})
+				result += '</ul>'
+
+				document.getElementById('result-screens').innerHTML = result
+			})
+		</script>
+
+	</section>
+
+	<section class="slide">
+		<h2>Node.js is powerful</h2>
+		<ol>
+			<li>Filesystem</li>
+			<li class="next">OS</li>
+			<li class="next">Network / sockets</li>
+			<li class="next">Process with <code>require('child_process')</code></li>
+		</ol>
+	</section>
+
+	<section class="slide">
+		<h2>
+			Exec bash
+			<a href="" id="run-rm-rf" class="next dashed" />run</a>
+		</h2>
+		<pre>
+			<code>const { exec } = require('child_process')</code>
+			<code id="rm-rf-hide">const msg = "Actually this message doesn't matter anymore"</code>
+			<code id="rm-rf-replace">exec('rm -rf', () => console.log(msg))</code>
+		</pre>
+
+		<div class="result" id="result-uptime"></div>
+		<script>
+			document.getElementById('run-rm-rf').addEventListener('click', (event) => {
+				event.preventDefault()
+				document.getElementById('rm-rf-hide').style.display = 'none'
+				document.getElementById('rm-rf-replace').innerHTML = "exec('uptime', (err, output) => console.log(output))"
+				new Notification('We saved your files!', {body: 'We will display your uptime instead of removing all your files'})
+				setTimeout(() => {
+					const { exec } = require('child_process')
+					exec('uptime', (err, output) => {
+						document.getElementById('result-uptime').innerHTML = `Uptime: ${output}`
+					})
+				}, 3000)
+			})
+		</script>
+	</section>
+
+	<section class="slide">
+		<h2>
+			Exec scripts
+			<a href="" id="run-ruby" class="next dashed" />run</a>
+		</h2>
+		<pre>
+			<code>const { exec } = require('child_process')</code>
+			<code>const script = `ruby -e "puts ObjectSpace.count_objects"`</code>
+			<code>exec(script, (err, output) => console.log(output))</code>
+		</pre>
+
+		<div class="result" id="result-ruby"></div>
+		<script>
+			document.getElementById('run-ruby').addEventListener('click', (event) => {
+				event.preventDefault()
+				const { exec } = require('child_process')
+				const script = `ruby -e "puts ObjectSpace.count_objects"`
+				exec(script, (err, output) => {
+					document.getElementById('result-ruby').innerHTML = `Ruby output: ${output}`
+				})
+			})
+		</script>
+	</section>
+
+	<section class="slide">
+		<h2>
+			Exec apple scripts
+			<a href="" id="run-apple-script" class="next dashed" />toggle dark mode</a>
+		</h2>
+		<pre>
+			<code>tell application "System Events"</code>
+			<code>  tell appearance preferences</code>
+			<code>  	set dark mode to not dark mode</code>
+			<code>  end tell</code>
+			<code>end tell</code>
+		</pre>
+		<pre>
+			<code>const script = "osascript -e '${appleScript}"</code>
+			<code>const { exec } = require('child_process')</code>
+			<code>exec(script)</code>
+		</pre>
+
+		<div class="result" id="result-ruby"></div>
+		<script>
+			document.getElementById('run-apple-script').addEventListener('click', (event) => {
+				event.preventDefault()
+				const appleScript = `
+					tell application "System Events"
+						tell appearance preferences
+							set dark mode to not dark mode
+						end tell
+					end tell
+				`
+				require('child_process').exec(`osascript -e '${appleScript}'`)
+			})
+		</script>
+	</section>
+	<div class="progress"></div>
+	<script src="shower/shower.min.js"></script>
+</body>
+</html>
