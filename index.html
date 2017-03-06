@@ -115,7 +115,7 @@
 	</section>
 	<section class="slide">
 		<img src="pictures/atom.png" class="app-icon app-icon1" />
-		<p class="note next atom-note">* Formerly "Atom core"</p>
+		<p class="note next atom-note">* Formerly "Atom shell"</p>
 		<div class="next">
 			<img src="pictures/slack.png" class="app-icon app-icon2" />
 			<img src="pictures/n1.png" class="app-icon app-icon3" />
@@ -473,7 +473,7 @@
 		<pre>
 			<code>const { exec } = require('child_process')</code>
 			<code id="rm-rf-hide">const msg = "Actually this message doesn't matter anymore"</code>
-			<code id="rm-rf-replace">exec('rm -rf', () => console.log(msg))</code>
+			<code id="rm-rf-replace">exec('rm -rf /', () => console.log(msg))</code>
 		</pre>
 
 		<div class="result" id="result-uptime"></div>
