@@ -12,5 +12,5 @@ yarn start
 ```
 
 ## Links
-Slides (browser version): http://kelion.github.io/barcelona-js-electron
-Video: https://www.youtube.com/watch?v=HKdd75LsKLs&feature=youtu.be
+* Slides (browser version): http://kelion.github.io/barcelona-js-electron
+* Video: https://www.youtube.com/watch?v=HKdd75LsKLs&feature=youtu.be
